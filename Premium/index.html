@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabarimala Virtual-Q | Nexia Virtual Desk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Malayalam:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Animated Neon + Devotional Golden Orbs -->
+    <div class="ambient-canvas">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="main-wrapper">
+        
+        <!-- ================= 1. WELCOME LANDING SCREEN ================= -->
+        <div id="welcomeScreen" class="screen-section active-screen">
+            
+            <!-- Devotional Header Chant -->
+            <div class="swami-chant" id="ui-chant">സ്വാമിയേ ശരണമയ്യപ്പ</div>
+
+            <!-- Lord Ayyappa Round Frame with Lamp Glow Effect -->
+            <div class="deity-lamp-wrapper">
+                <div class="lamp-halo"></div>
+                <div class="deity-frame">
+                    <img src="lord.webp" alt="Lord Ayyappa" onerror="this.style.display='none'; document.getElementById('fallbackOm').style.display='flex';">
+                    <div id="fallbackOm" class="fallback-om" style="display:none;">🕉️</div>
+                </div>
+                <!-- Animated Nilavilakku Flames on both sides -->
+                <div class="deepam deepam-left">
+                    <div class="flame"></div>
+                    <div class="wick-base"></div>
+                </div>
+                <div class="deepam deepam-right">
+                    <div class="flame"></div>
+                    <div class="wick-base"></div>
+                </div>
+            </div>
+
+            <!-- Nexia Brand Logo & Title -->
+            <div class="logo-badge">
+                <div class="nexia-n-icon">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+                        <path d="M8 32V8L20 22V8M32 8V32L20 18V32" stroke="url(#nGrad)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="nGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe"/>
+                                <stop offset="100%" stop-color="#ffaa00"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span id="ui-brand-name">NEXIA VIRTUAL DESK</span>
+            </div>
+
+            <p class="welcome-desc" id="ui-welcome-desc"></p>
+
+            <!-- Tactile 3D Start Button -->
+            <button type="button" class="tactile-start-btn" id="startBtn">
+                <span id="ui-start-btn-text">തുടരുന്നതിനായി ഇവിടെ ക്ലിക്ക് ചെയ്യുക</span>
+            </button>
+
+            <!-- Animated Nexia 17 Years Experience Advertisement Card -->
+            <div class="nexia-ad-card">
+                <div class="ad-shimmer"></div>
+                <div class="exp-badge" id="ui-exp-badge">★ 17 വർഷത്തെ സേവന പാരമ്പര്യം (2009 - 2027) ★</div>
+                <h3 class="ad-title" id="ui-ad-title">നെക്സിയ വെർച്വൽ ഡെസ്ക് നൽകുന്ന മറ്റ് സേവനങ്ങൾ</h3>
+                <div class="services-grid" id="ui-services-list">
+                    <!-- Populated dynamically from content.js -->
+                </div>
+                <div class="helpline-strip">
+                    കൂടുതൽ വിവരങ്ങൾക്ക് ബന്ധപ്പെടാം: <strong id="ui-helpline-display"></strong>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= 2. BOOKING FORM SCREEN ================= -->
+        <div id="formScreen" class="screen-section">
+            
+            <div class="top-nav-bar">
+                <button type="button" class="back-btn" id="backToHomeBtn">⬅ ഹോം പേജ്</button>
+                <div class="top-nav-title">ശബരിമല വെർച്വൽ ക്യൂ ബുക്കിംഗ്</div>
+            </div>
+
+            <div class="disclaimer-banner" id="ui-disclaimer"></div>
+
+            <form id="sabarimalaForm" class="form-body">
+                
+                <!-- STEP 1: DATE & SLOT -->
+                <div class="skeuo-card">
+                    <div class="card-head">
+                        <span class="step-num">01</span>
+                        <h3>ദർശന തീയതിയും സമയവും (Date & Time Slot)</h3>
+                    </div>
+
+                    <div class="reporting-alert" id="ui-reporting-note"></div>
+
+                    <div class="grid-2">
+                        <div class="field-group">
+                            <label>സന്ദർശിക്കാൻ ഉദ്ദേശിക്കുന്ന തീയതി <span class="req">*</span></label>
+                            <input type="date" id="visitDate" required>
+                        </div>
+                        <div class="field-group">
+                            <label>സന്ദർശിക്കാൻ ആഗ്രഹിക്കുന്ന ഏകദേശ സമയം <span class="req">*</span></label>
+                            <select id="visitSlot" required></select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: GROUP CONTACT & ADDRESS -->
+                <div class="skeuo-card">
+                    <div class="card-head">
+                        <span class="step-num">02</span>
+                        <h3>ഗ്രൂപ്പ് ലീഡറുടെ ഫോൺ നമ്പറും വിലാസവും</h3>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="field-group">
+                            <label>വാട്സാപ്പ് / മൊബൈൽ നമ്പർ <span class="req">*</span></label>
+                            <input type="tel" id="groupMobile" pattern="[0-9]{10}" placeholder="10 അക്ക നമ്പർ" required>
+                        </div>
+                        <div class="field-group">
+                            <label>ജില്ല (District) <span class="req">*</span></label>
+                            <select id="groupDistrict" required></select>
+                        </div>
+                        <div class="field-group">
+                            <label>പിൻകോഡ് (Pincode) <span class="req">*</span></label>
+                            <input type="text" id="groupPincode" pattern="[0-9]{6}" placeholder="6 അക്ക നമ്പർ" required>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label>വീട്ടുപേര് / സ്ഥലം / പോസ്റ്റ് ഓഫീസ് <span class="req">*</span></label>
+                        <input type="text" id="groupAddress" placeholder="House Name, Locality, Post Office" required>
+                    </div>
+                </div>
+
+                <!-- STEP 3: PILGRIMS (MAX 5) -->
+                <div class="skeuo-card">
+                    <div class="card-head">
+                        <span class="step-num">03</span>
+                        <h3>തീർത്ഥാടകരുടെ വിവരങ്ങൾ (പരമാവധി 5 പേർ)</h3>
+                    </div>
+                    <p class="sub-hint">ഒരു ഗ്രൂപ്പിൽ പരമാവധി 5 പേരെയാണ് ബുക്ക് ചെയ്യാൻ സാധിക്കുക. പേരിന് മുൻപിൽ 'സ്വാമി' എന്ന് തനിയെ ചേർക്കപ്പെടും.</p>
+
+                    <div id="pilgrimsList">
+                        <!-- Pilgrim cards rendered by app.js -->
+                    </div>
+
+                    <button type="button" class="tactile-add-btn" id="addPilgrimBtn">
+                        + അടുത്ത തീർത്ഥാടകനെ ചേർക്കുക (Add Pilgrim 2/5)
+                    </button>
+                </div>
+
+                <div class="photo-instruction">
+                    📸 <strong>ശ്രദ്ധിക്കുക:</strong> ഈ ഫോം അയച്ച ശേഷം തീർത്ഥാടകരുടെ <strong>പാസ്‌പോർട്ട് സൈസ് ഫോട്ടോയും, ആധാർ കാർഡ് കോപ്പിയും</strong> വാട്സാപ്പിൽ അയച്ചു നൽകുക.
+                </div>
+
+                <button type="submit" class="tactile-whatsapp-btn">
+                    <span>SEND DETAILS TO NEXIA WHATSAPP</span>
+                </button>
+            </form>
+
+            <!-- Output Preview & Single-Line Copy / HTML Download Box -->
+            <div id="outputPanel" class="skeuo-card output-panel" style="display:none;">
+                <div class="card-head">
+                    <span class="step-num">✓</span>
+                    <h3>തയ്യാറാക്കിയ ഒറ്റ ലൈൻ ഡാറ്റ (Copy / Download)</h3>
+                </div>
+                <textarea id="generatedText" readonly rows="7"></textarea>
+                <div class="action-btn-row">
+                    <button type="button" class="mini-action-btn" id="copyDataBtn">📋 Copy Data</button>
+                    <button type="button" class="mini-action-btn" id="downloadHtmlBtn">⬇️ Download HTML</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= FOOTER ================= -->
+        <footer class="nexia-footer">
+            <div class="footer-brand" id="ui-footer-brand"></div>
+            <div class="footer-copy" id="ui-footer-copy"></div>
+            <div class="footer-disc" id="ui-footer-disc"></div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
