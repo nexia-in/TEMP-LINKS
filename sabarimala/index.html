@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabarimala Virtual-Q Assistance | Nexia Virtual Desk</title>
+    <style>
+        :root {
+            --primary: #1e1b4b;
+            --secondary: #312e81;
+            --accent: #d97706;
+            --whatsapp: #25D366;
+            --bg: #f3f4f6;
+            --card: #ffffff;
+            --text: #1f2937;
+            --border: #d1d5db;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 20px 12px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-top: 6px solid var(--accent);
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #ffffff;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            color: #ffffff;
+        }
+        .header h2 {
+            font-size: 16px;
+            color: #fbbf24;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .disclaimer-banner {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 10px 15px;
+            font-size: 12.5px;
+            text-align: center;
+            border-bottom: 1px solid #fde68a;
+            font-weight: 500;
+        }
+        .form-body {
+            padding: 24px 20px;
+        }
+        .section-title {
+            font-size: 15.5px;
+            font-weight: 700;
+            color: var(--primary);
+            background: #eef2ff;
+            padding: 10px 12px;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            margin: 22px 0 15px 0;
+        }
+        .section-title:first-child {
+            margin-top: 0;
+        }
+        .grid-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 12px;
+        }
+        .form-group {
+            margin-bottom: 14px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #374151;
+        }
+        label span.req {
+            color: #dc2626;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            background: #f9fafb;
+            transition: all 0.2s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+        }
+        .prasadam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 12px;
+            background: #f9fafb;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+        .prasadam-item label {
+            font-size: 12.5px;
+            color: #1f2937;
+        }
+        .note-box {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-left: 4px solid #059669;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #065f46;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        .submit-btn {
+            width: 100%;
+            background: var(--whatsapp);
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            transition: background 0.2s, transform 0.1s;
+        }
+        .submit-btn:hover {
+            background: #1ebe5b;
+        }
+        .submit-btn:active {
+            transform: scale(0.99);
+        }
+        .footer {
+            text-align: center;
+            padding: 18px 15px;
+            background: #111827;
+            color: #9ca3af;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        .footer strong {
+            color: #ffffff;
+        }
+        .footer .disclaimer-small {
+            font-size: 11px;
+            color: #6b7280;
+            margin-top: 6px;
+        }
+        @media (max-width: 580px) {
+            .grid-row, .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>NEXIA VIRTUAL DESK</h1>
+        <h2>ശബരിമല വെർച്വൽ ക്യൂ (Virtual-Q) രജിസ്ട്രേഷൻ ഫോം</h2>
+    </div>
+
+    <div class="disclaimer-banner">
+        <strong>ശ്രദ്ധിക്കുക:</strong> ഇതൊരു ഔദ്യോഗിക വെബ്സൈറ്റ് അല്ല. ഉപഭോക്താക്കൾക്ക് ഓൺലൈൻ ബുക്കിംഗ് സേവനങ്ങൾ എളുപ്പത്തിൽ ലഭ്യമാക്കുന്നതിനായി <strong>Nexia Virtual Desk</strong> തയ്യാറാക്കിയ സഹായക പേജാണിത്.
+    </div>
+
+    <form id="sabarimalaForm" class="form-body" onsubmit="sendToWhatsApp(event)">
+        
+        <!-- 1. PILGRIM DETAILS -->
+        <div class="section-title">1. തീർത്ഥാടകന്റെ വിവരങ്ങൾ (Pilgrim Details)</div>
+        
+        <div class="grid-row">
+            <div class="form-group">
+                <label>First Name (പേരിന്റെ ആദ്യ ഭാഗം) <span class="req">*</span></label>
+                <input type="text" id="firstName" placeholder="ID കാർഡിലുള്ളത് പോലെ" required>
+            </div>
+            <div class="form-group">
+                <label>Last Name (ഇനിഷ്യൽ / രണ്ടാം ഭാഗം) <span class="req">*</span></label>
+                <input type="text" id="lastName" placeholder="ഉദാ: K R" required>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="form-group">
+                <label>Mobile Number (മൊബൈൽ നമ്പർ) <span class="req">*</span></label>
+                <input type="tel" id="mobile" pattern="[0-9]{10}" placeholder="10 അക്ക മൊബൈൽ നമ്പർ" required>
+            </div>
+            <div class="form-group">
+                <label>Date of Birth (ജനനത്തീയതി) <span class="req">*</span></label>
+                <input type="date" id="dob" required>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="form-group">
+                <label>Gender (ലിംഗം) <span class="req">*</span></label>
+                <select id="gender" required>
+                    <option value="">തിരഞ്ഞെടുക്കുക</option>
+                    <option value="Male">Male (പുരുഷൻ)</option>
+                    <option value="Female">Female (സ്ത്രീ)</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Star (ജനന നക്ഷത്രം) <span class="req">*</span></label>
+                <select id="star" required>
+                    <option value="">നക്ഷത്രം തിരഞ്ഞെടുക്കുക</option>
+                    <option value="Aswathi (അശ്വതി)">Aswathi (അശ്വതി)</option>
+                    <option value="Bharani (ഭരണി)">Bharani (ഭരണി)</option>
+                    <option value="Kaarthika (കാർത്തിക)">Kaarthika (കാർത്തിക)</option>
+                    <option value="Rohini (രോഹിണി)">Rohini (രോഹിണി)</option>
+                    <option value="Makeeryam (മകയിരം)">Makeeryam (മകയിരം)</option>
+                    <option value="Thiruvaathira (തിരുവാതിര)">Thiruvaathira (തിരുവാതിര)</option>
+                    <option value="Punartham (പുണർതം)">Punartham (പുണർതം)</option>
+                    <option value="Pooyyam (പൂയം)">Pooyyam (പൂയം)</option>
+                    <option value="Aayilyam (ആയില്യം)">Aayilyam (ആയില്യം)</option>
+                    <option value="Makham (മകം)">Makham (മകം)</option>
+                    <option value="Pooram (പൂരം)">Pooram (പൂരം)</option>
+                    <option value="Uthram (ഉത്രം)">Uthram (ഉത്രം)</option>
+                    <option value="Atham (അത്തം)">Atham (അത്തം)</option>
+                    <option value="Chitra (ചിത്തിര)">Chitra (ചിത്തിര)</option>
+                    <option value="Chothi (ചോതി)">Chothi (ചോതി)</option>
+                    <option value="Visaakam (വിശാഖം)">Visaakam (വിശാഖം)</option>
+                    <option value="Anizham (അനിഴം)">Anizham (അനിഴം)</option>
+                    <option value="Thruketta (തൃക്കേട്ട)">Thruketta (തൃക്കേട്ട)</option>
+                    <option value="Moolam (മൂലം)">Moolam (മൂലം)</option>
+                    <option value="Pooraadam (പൂരാടം)">Pooraadam (പൂരാടം)</option>
+                    <option value="Uthraadam (ഉത്രാടം)">Uthraadam (ഉത്രാടം)</option>
+                    <option value="Thiruvonam (തിരുവോണം)">Thiruvonam (തിരുവോണം)</option>
+                    <option value="Avittam (അവിട്ടം)">Avittam (അവിട്ടം)</option>
+                    <option value="Chathayam (ചതയം)">Chathayam (ചതയം)</option>
+                    <option value="Poorattadhi (പൂരുരുട്ടാതി)">Poorattadhi (പൂരുരുട്ടാതി)</option>
+                    <option value="Uthrattathi (ഉത്രട്ടാതി)">Uthrattathi (ഉത്രട്ടാതി)</option>
+                    <option value="Revathi (രേവതി)">Revathi (രേവതി)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 2. ADDRESS & ID DETAILS -->
+        <div class="section-title">2. മേൽവിലാസവും തിരിച്ചറിയൽ രേഖയും (Address & ID)</div>
+
+        <div class="grid-row">
+            <div class="form-group">
+                <label>Address Line 1 (വീട്ടുപേര്) <span class="req">*</span></label>
+                <input type="text" id="address1" placeholder="House Name / No." required>
+            </div>
+            <div class="form-group">
+                <label>Address Line 2 (സ്ഥലം / പോസ്റ്റ് ഓഫീസ്) <span class="req">*</span></label>
+                <input type="text" id="address2" placeholder="Locality / Post Office" required>
+            </div>
+        </div>
+
+        <div class="grid-3">
+            <div class="form-group">
+                <label>District (ജില്ല) <span class="req">*</span></label>
+                <select id="district" required>
+                    <option value="Thrissur">Thrissur</option>
+                    <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                    <option value="Kollam">Kollam</option>
+                    <option value="Pathanamthitta">Pathanamthitta</option>
+                    <option value="Alappuzha">Alappuzha</option>
+                    <option value="Kottayam">Kottayam</option>
+                    <option value="Idukki">Idukki</option>
+                    <option value="Ernakulam">Ernakulam</option>
+                    <option value="Palakkad">Palakkad</option>
+                    <option value="Malappuram">Malappuram</option>
+                    <option value="Kozhikode">Kozhikode</option>
+                    <option value="Wayanad">Wayanad</option>
+                    <option value="Kannur">Kannur</option>
+                    <option value="Kasaragod">Kasaragod</option>
+                    <option value="Other State">Other State</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>State <span class="req">*</span></label>
+                <input type="text" id="state" value="Kerala" required>
+            </div>
+            <div class="form-group">
+                <label>Pincode (പിൻകോഡ്) <span class="req">*</span></label>
+                <input type="text" id="pincode" pattern="[0-9]{6}" placeholder="6 അക്ക നമ്പർ" required>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="form-group">
+                <label>Photo ID Proof (തിരിച്ചറിയൽ രേഖ) <span class="req">*</span></label>
+                <select id="idType" required>
+                    <option value="Aadhaar">Aadhaar Card</option>
+                    <option value="Voter ID">Voter ID</option>
+                    <option value="Passport">Passport</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Photo ID Number (ഐഡി കാർഡ് നമ്പർ) <span class="req">*</span></label>
+                <input type="text" id="idNumber" placeholder="ID നമ്പർ തെറ്റാതെ നൽകുക" required>
+            </div>
+        </div>
+
+        <!-- 3. NOMINEE DETAILS -->
+        <div class="section-title">3. നോമിനി വിവരങ്ങൾ (Parent / Nominee Details)</div>
+
+        <div class="grid-3">
+            <div class="form-group">
+                <label>Nominee Name (നോമിനിയുടെ പേര്) <span class="req">*</span></label>
+                <input type="text" id="nomineeName" placeholder="അച്ഛൻ / അമ്മ / ജീവിതപങ്കാളിയുടെ പേര്" required>
+            </div>
+            <div class="form-group">
+                <label>Age (വയസ്സ്) <span class="req">*</span></label>
+                <input type="number" id="nomineeAge" min="1" max="110" placeholder="വയസ്സ്" required>
+            </div>
+            <div class="form-group">
+                <label>Relation (ബന്ധം) <span class="req">*</span></label>
+                <select id="nomineeRelation" required>
+                    <option value="">തിരഞ്ഞെടുക്കുക</option>
+                    <option value="Father (അച്ഛൻ)">Father (അച്ഛൻ)</option>
+                    <option value="Mother (അമ്മ)">Mother (അമ്മ)</option>
+                    <option value="Spouse (ഭാര്യ / ഭർത്താവ്)">Spouse (ഭാര്യ / ഭർത്താവ്)</option>
+                    <option value="Son (മകൻ)">Son (മകൻ)</option>
+                    <option value="Daughter (മകൾ)">Daughter (മകൾ)</option>
+                    <option value="Brother (സഹോദരൻ)">Brother (സഹോദരൻ)</option>
+                    <option value="Sister (സഹോദരി)">Sister (സഹോദരി)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 4. DARSHAN & ROUTE DETAILS -->
+        <div class="section-title">4. ദർശന തീയതിയും യാത്രാ പാതയും (Darshan & Route)</div>
+
+        <div class="grid-3">
+            <div class="form-group">
+                <label>Darshan Date (ദർശന തീയതി) <span class="req">*</span></label>
+                <input type="date" id="bookingDate" required>
+            </div>
+            <div class="form-group">
+                <label>Preferred Slot (സമയം) <span class="req">*</span></label>
+                <select id="slotTime" required>
+                    <option value="Morning (രാവിലെ)">Morning (രാവിലെ)</option>
+                    <option value="Afternoon (ഉച്ചയ്ക്ക്)">Afternoon (ഉച്ചയ്ക്ക്)</option>
+                    <option value="Evening (വൈകുന്നേരം)">Evening (വൈകുന്നേരം)</option>
+                    <option value="Any Available Slot">Any Available Slot</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Route (യാത്രാ പാത) <span class="req">*</span></label>
+                <select id="route" required>
+                    <option value="Pamba - Marakkoottam (4 Kms)">Pamba - Marakkoottam (4 Kms)</option>
+                    <option value="Erumely - Traditional Path (46 Kms)">Erumely - Traditional Path (46 Kms)</option>
+                    <option value="Vandiperiyar - Pulmedu (16 Kms)">Vandiperiyar - Pulmedu (16 Kms)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 5. PRASADAM DETAILS -->
+        <div class="section-title">5. പ്രസാദം ബുക്കിംഗ് (Prasadam - ആവശ്യമുണ്ടെങ്കിൽ മാത്രം)</div>
+        
+        <div class="prasadam-grid">
+            <div class="prasadam-item">
+                <label>അരവണ (Aravana - ₹100)</label>
+                <input type="number" id="aravana" min="0" max="10" value="0">
+            </div>
+            <div class="prasadam-item">
+                <label>അപ്പം (Appam - ₹45)</label>
+                <input type="number" id="appam" min="0" max="5" value="0">
+            </div>
+            <div class="prasadam-item">
+                <label>അഭിഷേക നെയ്യ് (Ghee - ₹100)</label>
+                <input type="number" id="ghee" min="0" max="5" value="0">
+            </div>
+        </div>
+
+        <div class="note-box">
+            <strong>പ്രധാന അറിയിപ്പ്:</strong> താഴെ കാണുന്ന ബട്ടൺ അമർത്തി വിവരങ്ങൾ വാട്സാപ്പിലേക്ക് അയച്ച ശേഷം, തീർത്ഥാടകന്റെ <strong>പാസ്‌പോർട്ട് സൈസ് ഫോട്ടോയും</strong>, <strong>ആധാർ / ഐഡി കാർഡിന്റെ കോപ്പിയും</strong> വാട്സാപ്പിൽ അയച്ചു നൽകുക.
+        </div>
+
+        <button type="submit" class="submit-btn">
+            <span>Send Booking Details to Nexia WhatsApp</span>
+        </button>
+    </form>
+
+    <div class="footer">
+        <div><strong>NEXIA VIRTUAL DESK</strong> | WhatsApp Support: +91 9961850698</div>
+        <div>2009-2027 &copy; Created by <strong>Nexia Tech</strong>. All Rights Reserved.</div>
+        <div class="disclaimer-small">Disclaimer: This is NOT an official website of Travancore Devaswom Board. Created solely for customer data collection and online application assistance.</div>
+    </div>
+</div>
+
+<script>
+function sendToWhatsApp(event) {
+    event.preventDefault();
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const mobile = document.getElementById('mobile').value.trim();
+    const dobRaw = document.getElementById('dob').value;
+    const gender = document.getElementById('gender').value;
+    const star = document.getElementById('star').value;
+
+    const address1 = document.getElementById('address1').value.trim();
+    const address2 = document.getElementById('address2').value.trim();
+    const district = document.getElementById('district').value;
+    const state = document.getElementById('state').value.trim();
+    const pincode = document.getElementById('pincode').value.trim();
+    const idType = document.getElementById('idType').value;
+    const idNumber = document.getElementById('idNumber').value.trim();
+
+    const nomineeName = document.getElementById('nomineeName').value.trim();
+    const nomineeAge = document.getElementById('nomineeAge').value.trim();
+    const nomineeRelation = document.getElementById('nomineeRelation').value;
+
+    const bookingDateRaw = document.getElementById('bookingDate').value;
+    const slotTime = document.getElementById('slotTime').value;
+    const route = document.getElementById('route').value;
+
+    const aravana = document.getElementById('aravana').value || '0';
+    const appam = document.getElementById('appam').value || '0';
+    const ghee = document.getElementById('ghee').value || '0';
+
+    const formatDate = (dateStr) => {
+        if (!dateStr) return 'N/A';
+        const parts = dateStr.split('-');
+        return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    };
+
+    const dob = formatDate(dobRaw);
+    const bookingDate = formatDate(bookingDateRaw);
+
+    let prasadamText = 'ആവശ്യമില്ല (None)';
+    if (parseInt(aravana) > 0 || parseInt(appam) > 0 || parseInt(ghee) > 0) {
+        prasadamText = `Aravana: ${aravana}, Appam: ${appam}, Ghee: ${ghee}`;
+    }
+
+    const message = 
+`*SABARIMALA VIRTUAL-Q BOOKING*
+*Nexia Virtual Desk*
+
+*1. Pilgrim Details:*
+• *First Name:* ${firstName}
+• *Last Name:* ${lastName}
+• *Mobile:* ${mobile}
+• *DOB:* ${dob}
+• *Gender:* ${gender}
+• *Star:* ${star}
+
+*2. Address & ID Proof:*
+• *Address 1:* ${address1}
+• *Address 2:* ${address2}
+• *District:* ${district}
+• *State:* ${state}
+• *Pincode:* ${pincode}
+• *ID Proof:* ${idType}
+• *ID Number:* ${idNumber}
+
+*3. Nominee Details:*
+• *Nominee Name:* ${nomineeName}
+• *Nominee Age:* ${nomineeAge}
+• *Relation:* ${nomineeRelation}
+
+*4. Darshan & Prasadam:*
+• *Darshan Date:* ${bookingDate}
+• *Preferred Slot:* ${slotTime}
+• *Route:* ${route}
+• *Prasadam:* ${prasadamText}
+
+*(തീർത്ഥാടകന്റെ ഫോട്ടോയും ഐഡി കാർഡ് കോപ്പിയും ഇതോടൊപ്പം അയക്കുന്നു)*`;
+
+    const whatsappUrl = `https://wa.me/919961850698?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
+</script>
+
+</body>
+</html>
