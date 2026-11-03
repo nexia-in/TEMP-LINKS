@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sabarimala Virtual-Q | Nexia Virtual Desk</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Malayalam:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/Premium/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -24,37 +24,48 @@
             <!-- Devotional Header Chant -->
             <div class="swami-chant" id="ui-chant">സ്വാമിയേ ശരണമയ്യപ്പ</div>
 
-            <!-- Lord Ayyappa Round Frame with Lamp Glow Effect -->
-            <div class="deity-lamp-wrapper">
-                <div class="lamp-halo"></div>
-                <div class="deity-frame">
-                    <img src="/Premium/lord.webp" alt="Lord Ayyappa" onerror="this.style.display='none'; document.getElementById('fallbackOm').style.display='flex';">
-                    <div id="fallbackOm" class="fallback-om" style="display:none;">🕉️</div>
-                </div>
-                <!-- Animated Nilavilakku Flames on both sides -->
-                <div class="deepam deepam-left">
-                    <div class="flame"></div>
-                    <div class="wick-base"></div>
-                </div>
-                <div class="deepam deepam-right">
-                    <div class="flame"></div>
-                    <div class="wick-base"></div>
-                </div>
-            </div>
+           <!-- Lord Ayyappa Round Frame with Lamp and Fire Glow Effect -->
+<div class="deity-lamp-wrapper" style="position: relative;">
+    
+    <!-- കറങ്ങുന്ന അഗ്നിവലയം -->
+    <div class="fire-glow-ring"></div>
+
+    <div class="lamp-halo"></div>
+    <div class="deity-frame">
+        <img src="./lord.webp" alt="Lord Ayyappa" onerror="this.style.display='none'; document.getElementById('fallbackOm').style.display='flex';">
+        <div id="fallbackOm" class="fallback-om" style="display:none;">🕉️</div>
+    </div>
+    
+    <!-- Animated Nilavilakku Flames on both sides -->
+    <div class="deepam deepam-left">
+        <div class="flame"></div>
+        <div class="wick-base"></div>
+    </div>
+    <div class="deepam deepam-right">
+        <div class="flame"></div>
+        <div class="wick-base"></div>
+    </div>
+</div>
 
             <!-- Nexia Brand Logo & Title -->
             <div class="logo-badge">
-                <div class="nexia-n-icon">
-                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
-                        <path d="M8 32V8L20 22V8M32 8V32L20 18V32" stroke="url(#nGrad)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <defs>
-                            <linearGradient id="nGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#00f2fe"/>
-                                <stop offset="100%" stop-color="#ffaa00"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
+                <div class="nexia-n-icon" style="position: relative; display: inline-flex; align-items: center; justify-content: center;">
+    
+    <!-- Glowing Ring -->
+    <div style="position: absolute; width: 44px; height: 44px; border: 2px solid transparent; border-top: 2px solid #00f2fe; border-right: 2px solid #ffaa00; border-radius: 50%; animation: spin 1.5s linear infinite; box-shadow: 0 0 8px #00f2fe, inset 0 0 8px #ffaa00; filter: blur(0.5px);"></div>
+
+    <!-- N Logo -->
+    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" style="position: relative; z-index: 2;">
+        <path d="M9 32V8L31 32V8" stroke="url(#nGrad)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 3px rgba(0, 242, 254, 0.8));"/>
+        <defs>
+            <linearGradient id="nGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00f2fe"/>
+                <stop offset="100%" stop-color="#ffaa00"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+</div>
                 <span id="ui-brand-name">NEXIA VIRTUAL DESK</span>
             </div>
 
@@ -192,7 +203,7 @@
     </div>
 
     <!-- Scripts -->
-   <script src="/Premium/content.js"></script>
-    <script src="/Premium/app.js"></script>
+    <script src="content.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
