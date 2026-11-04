@@ -208,6 +208,16 @@ body {
 }
 
 /* 3D Tactile Start Button */
+.home-btn-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 30;
+}
+
 .tactile-start-btn {
     position: relative;
     z-index: 30;
@@ -221,7 +231,41 @@ body {
     cursor: pointer;
     box-shadow: 0 7px 0 #9d3800, 0 14px 28px rgba(251, 133, 0, 0.45), inset 0 2px 2px rgba(255, 255, 255, 0.5);
     transition: all 0.12s ease;
-    margin-bottom: 28px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.tactile-self-btn {
+    background: linear-gradient(180deg, #00f2fe 0%, #2563eb 100%);
+    color: #041018;
+    box-shadow: 0 7px 0 #0e3a8a, 0 14px 28px rgba(0, 242, 254, 0.35), inset 0 2px 2px rgba(255, 255, 255, 0.45);
+}
+
+.tactile-self-btn:active {
+    transform: translateY(6px);
+    box-shadow: 0 1px 0 #0e3a8a, 0 5px 12px rgba(0, 242, 254, 0.3);
+}
+
+.back-home-link {
+    color: var(--neon-cyan);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.leader-share-box {
+    background: rgba(0, 242, 254, 0.08);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 8px;
+}
+
+.leader-share-box p {
+    font-size: 12.5px;
+    color: #bae6fd;
+    line-height: 1.5;
+    margin-bottom: 10px;
 }
 .tactile-start-btn:active {
     transform: translateY(6px);

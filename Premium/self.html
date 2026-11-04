@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self Coordination | Nexia Virtual Desk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Malayalam:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="ambient-canvas">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="main-wrapper">
+
+        <div id="welcomeScreen" class="screen-section active-screen">
+
+            <div class="swami-chant" id="ui-chant">സ്വാമിയേ ശരണമയ്യപ്പ</div>
+
+            <div class="deity-lamp-wrapper" style="position: relative;">
+                <div class="fire-glow-ring"></div>
+                <div class="lamp-halo"></div>
+                <div class="deity-frame">
+                    <img src="./lord.webp" alt="Lord Ayyappa" onerror="this.style.display='none'; document.getElementById('fallbackOm').style.display='flex';">
+                    <div id="fallbackOm" class="fallback-om" style="display:none;">ॐ</div>
+                </div>
+                <div class="deepam deepam-left">
+                    <div class="flame"></div>
+                    <div class="wick-base"></div>
+                </div>
+                <div class="deepam deepam-right">
+                    <div class="flame"></div>
+                    <div class="wick-base"></div>
+                </div>
+            </div>
+
+            <div class="logo-badge">
+                <div class="nexia-n-icon" style="position: relative; display: inline-flex; align-items: center; justify-content: center;">
+                    <div style="position: absolute; width: 44px; height: 44px; border: 2px solid transparent; border-top: 2px solid #00f2fe; border-right: 2px solid #ffaa00; border-radius: 50%; animation: spin 1.5s linear infinite; box-shadow: 0 0 8px #00f2fe, inset 0 0 8px #ffaa00; filter: blur(0.5px);"></div>
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" style="position: relative; z-index: 2;">
+                        <path d="M9 32V8L31 32V8" stroke="url(#nGradSelf)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 3px rgba(0, 242, 254, 0.8));"/>
+                        <defs>
+                            <linearGradient id="nGradSelf" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe"/>
+                                <stop offset="100%" stop-color="#ffaa00"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span id="ui-brand-name">NEXIA VIRTUAL DESK</span>
+            </div>
+
+            <p class="welcome-desc" id="ui-welcome-desc"></p>
+
+            <div class="home-btn-stack">
+                <button type="button" class="tactile-start-btn tactile-self-btn" id="startSelfBtn">
+                    സെൽഫ് കോർഡിനേഷൻ / Self Coordination
+                </button>
+                <a href="index.html" class="back-home-link">ഹോം / Home - Virtual-Q Booking</a>
+            </div>
+
+            <div class="nexia-ad-card">
+                <div class="ad-shimmer"></div>
+                <div class="exp-badge" id="ui-exp-badge"></div>
+                <h3 class="ad-title" id="ui-ad-title"></h3>
+                <div class="services-grid" id="ui-services-list"></div>
+                <div class="helpline-strip">
+                    Nexia Virtual Desk, Olarikkara, Thrissur<br>
+                    കൂടുതൽ വിവരങ്ങൾക്ക് ബന്ധപ്പെടാം: <strong id="ui-helpline-display"></strong>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="formScreen" class="screen-section">
+
+            <div class="top-nav-bar">
+                <button type="button" class="back-btn" id="backToHomeBtn">ഹോം പേജ്</button>
+                <div class="top-nav-title">സെൽഫ് കോർഡിനേഷൻ</div>
+            </div>
+
+            <div class="disclaimer-banner" id="ui-disclaimer"></div>
+
+            <form id="selfCoordForm" class="form-body">
+
+                <div class="skeuo-card">
+                    <div class="card-head">
+                        <span class="step-num">01</span>
+                        <h3>ടീം ലീഡറുടെ നമ്പർ / Group Leader Phone</h3>
+                    </div>
+                    <p class="sub-hint">ലീഡർ ഈ ലിങ്ക് അംഗങ്ങൾക്ക് അയക്കുക. അംഗം ലീഡറുടെ വാട്സാപ്പ് നമ്പർ നൽകി സ്വന്തം വിവരങ്ങൾ അയക്കുക. Leader shares this link. Member enters leader WhatsApp number and sends own details.</p>
+                    <div class="field-group">
+                        <label>ഗ്രൂപ്പ് ലീഡറുടെ വാട്സാപ്പ് നമ്പർ / Group Leader WhatsApp <span class="req">*</span></label>
+                        <input type="tel" id="leaderPhone" pattern="[0-9]{10}" placeholder="10 അക്ക നമ്പർ / 10 digit number" required>
+                    </div>
+                    <div class="leader-share-box">
+                        <p>ലീഡർ ആണെങ്കിൽ: നമ്പർ നൽകി ലിങ്ക് കോപ്പി ചെയ്ത് അംഗങ്ങൾക്ക് അയക്കാം. If you are the leader, generate a share link so members need not type your number.</p>
+                        <div class="action-btn-row">
+                            <button type="button" class="mini-action-btn" id="copyShareLinkBtn">Copy Share Link</button>
+                            <button type="button" class="mini-action-btn" id="waShareLinkBtn">Share Link via WhatsApp</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skeuo-card">
+                    <div class="card-head">
+                        <span class="step-num">02</span>
+                        <h3>തീർത്ഥാടകന്റെ വിവരങ്ങൾ / Pilgrim Details</h3>
+                    </div>
+                    <p class="sub-hint">ഒരു വ്യക്തി മാത്രം. Fill details of one person only.</p>
+
+                    <div class="pilgrim-box" id="selfPilgrimBox">
+                        <div class="pilgrim-row-2">
+                            <div>
+                                <label>First Name / പേര് <span class="req">*</span></label>
+                                <input type="text" id="pFirstName" placeholder="First Name" required>
+                            </div>
+                            <div>
+                                <label>Last Name / അവസാന പേര് <span class="req">*</span></label>
+                                <input type="text" id="pLastName" placeholder="Last Name" required>
+                            </div>
+                        </div>
+
+                        <div class="pilgrim-row-3">
+                            <div>
+                                <label>Mobile Number / മൊബൈൽ <span class="req">*</span></label>
+                                <input type="tel" id="pMobile" pattern="[0-9]{10}" placeholder="10 അക്ക നമ്പർ" required>
+                            </div>
+                            <div>
+                                <label>Gender / ലിംഗം <span class="req">*</span></label>
+                                <select id="pGender" required>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Date of Birth / ജനന തീയതി <span class="req">*</span></label>
+                                <input type="date" id="pDob" required>
+                            </div>
+                        </div>
+
+                        <div class="pilgrim-row-3">
+                            <div>
+                                <label>Photo ID Type <span class="req">*</span></label>
+                                <select id="pIdType" required></select>
+                            </div>
+                            <div>
+                                <label>ID Number <span class="req">*</span></label>
+                                <input type="text" id="pIdNum" placeholder="ID Number" required>
+                            </div>
+                            <div>
+                                <label>Language / ഭാഷ <span class="req">*</span></label>
+                                <select id="pLanguage" required></select>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Star / നക്ഷത്രം <span class="req">*</span></label>
+                            <select id="pStar" required>
+                                <option value="">തിരഞ്ഞെടുക്കുക / Select</option>
+                            </select>
+                        </div>
+
+                        <div class="pilgrim-section-label">വിലാസം / Address</div>
+                        <div class="field-group">
+                            <label>Address <span class="req">*</span></label>
+                            <input type="text" id="pAddress" placeholder="House Name, Street, Locality" required>
+                        </div>
+                        <div class="pilgrim-row-2">
+                            <div>
+                                <label>Post Office <span class="req">*</span></label>
+                                <input type="text" id="pPostOffice" placeholder="Post Office" required>
+                            </div>
+                            <div>
+                                <label>Postal Code <span class="req">*</span></label>
+                                <input type="text" id="pPostalCode" pattern="[0-9]{6}" placeholder="6 അക്ക നമ്പർ" required>
+                            </div>
+                        </div>
+                        <div class="pilgrim-row-3">
+                            <div>
+                                <label>Country <span class="req">*</span></label>
+                                <select id="pCountry" required></select>
+                            </div>
+                            <div>
+                                <label>State / Province <span class="req">*</span></label>
+                                <select id="pState" required></select>
+                            </div>
+                            <div>
+                                <label>District / City <span class="req">*</span></label>
+                                <select id="pDistrict" required></select>
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <label>Zip / Pincode <span class="req">*</span></label>
+                            <input type="text" id="pPincode" pattern="[0-9]{6}" placeholder="6 അക്ക നമ്പർ" required>
+                        </div>
+
+                        <div class="pilgrim-section-label">രക്ഷകർത്താവ് / Guardian</div>
+                        <div class="pilgrim-row-3">
+                            <div>
+                                <label>Guardian Name / രക്ഷകർത്താവിന്റെ പേര് <span class="req">*</span></label>
+                                <input type="text" id="pParentName" placeholder="Guardian Name" required>
+                            </div>
+                            <div>
+                                <label>Guardian Age / പ്രായം <span class="req">*</span></label>
+                                <input type="number" id="pParentAge" min="1" max="120" placeholder="Age" required>
+                            </div>
+                            <div>
+                                <label>Relation / ബന്ധം <span class="req">*</span></label>
+                                <select id="pParentRelation" required>
+                                    <option value="Father">Father</option>
+                                    <option value="Mother">Mother</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="text" id="pParentRelationOther" placeholder="Specify relation / ബന്ധം എഴുതുക" style="display:none; margin-top:8px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="photo-instruction">
+                    ശ്രദ്ധിക്കുക: Send ക്ലിക്ക് ചെയ്താൽ വിവരങ്ങൾ ലീഡറുടെ വാട്സാപ്പിലേക്ക് പോകും. പാസ്‌പോർട്ട് ഫോട്ടോയും ID കോപ്പിയും വാട്സാപ്പിൽ അയക്കുക. After Send, details go to the leader WhatsApp. Also send passport photo and ID copy.
+                </div>
+
+                <button type="submit" class="tactile-whatsapp-btn">
+                    <span>SEND DETAILS TO GROUP LEADER</span>
+                </button>
+            </form>
+
+            <div class="nexia-ad-card" style="margin: 0 20px 20px;">
+                <div class="ad-shimmer"></div>
+                <div class="exp-badge">NEXIA VIRTUAL DESK • Olarikkara, Thrissur</div>
+                <h3 class="ad-title">നെക്സിയ വെർച്വൽ ഡെസ്ക് നൽകുന്ന സേവനങ്ങൾ</h3>
+                <div class="services-grid" id="ui-services-list-form"></div>
+                <div class="helpline-strip">
+                    Olarikkara, Thrissur | WhatsApp: <strong id="ui-helpline-display-form"></strong>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="nexia-footer">
+            <div class="footer-brand" id="ui-footer-brand"></div>
+            <div class="footer-copy" id="ui-footer-copy"></div>
+            <div class="footer-disc" id="ui-footer-disc"></div>
+        </footer>
+
+    </div>
+
+    <script src="content.js"></script>
+    <script src="self.js"></script>
+</body>
+</html>

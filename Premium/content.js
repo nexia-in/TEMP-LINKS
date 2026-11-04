@@ -72,7 +72,21 @@ const NEXIA_CONTENT = {
         "പൂരുരുട്ടാതി (Poorattadhi)", "ഉത്രട്ടാതി (Uthrattathi)", "രേവതി (Revathi)"
     ],
 
+    locationLine: "Olarikkara, Thrissur, Kerala",
+
     footerBrand: "NEXIA VIRTUAL DESK • Olarikkara, Thrissur | WhatsApp: +91 9961850698",
     footerCopy: "2009 - 2027 © Created by Nexia Tech. Celebrating 17 Years of Digital Service Excellence.",
-    footerDisclaimer: "Disclaimer: Not an official Travancore Devaswom Board website. Created for customer assistance."
+    footerDisclaimer: "Disclaimer: Not an official Travancore Devaswom Board website. Created for customer assistance.",
+
+    selfCoord: {
+        pageTitle: "സെൽഫ് കോർഡിനേഷൻ | Self Coordination",
+        welcomeDescription: "ടീം ലീഡർ ഈ ലിങ്ക് അംഗങ്ങൾക്ക് അയക്കുക. ഓരോ തീർത്ഥാടകനും സ്വന്തം വിവരങ്ങൾ നൽകി ലീഡറുടെ വാട്സാപ്പിലേക്ക് അയക്കാം. Team leader shares this link. Each pilgrim fills their own details and sends them to the leader on WhatsApp.",
+        howTitle: "എങ്ങനെ ഉപയോഗിക്കാം / How it works",
+        howSteps: [
+            "1. ടീം ലീഡർ ഈ പേജ് ലിങ്ക് അംഗങ്ങൾക്ക് വാട്സാപ്പിൽ അയക്കുക. / Leader shares this page link with members.",
+            "2. അംഗം ലീഡറുടെ വാട്സാപ്പ് നമ്പർ നൽകുക. / Member enters the leader WhatsApp number.",
+            "3. സ്വന്തം മുഴുവൻ വിവരങ്ങൾ നൽകുക. / Member fills their own full details.",
+            "4. Send ക്ലിക്ക് ചെയ്താൽ വിവരങ്ങൾ ലീഡറുടെ വാട്സാപ്പിലേക്ക് പോകും. / Send opens WhatsApp to the leader number."
+        ]
+    }
 };
