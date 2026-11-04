@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sabarimala Virtual-Q | Nexia Virtual Desk</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Malayalam:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/Premium/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
 
     <div class="lamp-halo"></div>
     <div class="deity-frame">
-        <img src="/Premium/lord.webp" alt="Lord Ayyappa" onerror="this.style.display='none'; document.getElementById('fallbackOm').style.display='flex';">
+        <img src="./lord.webp" alt="Lord Ayyappa" onerror="this.style.display='none'; document.getElementById('fallbackOm').style.display='flex';">
         <div id="fallbackOm" class="fallback-om" style="display:none;">🕉️</div>
     </div>
     
@@ -72,7 +72,7 @@
             <p class="welcome-desc" id="ui-welcome-desc"></p>
 
             <!-- Tactile 3D Start Button -->
-            <button type="button" class="tactile-start-btn" id="startBtn">
+            <button type="button" class="tactile-start-btn" id="startBtn" onclick="showFormScreen()">
                 <span id="ui-start-btn-text">തുടരുന്നതിനായി ഇവിടെ ക്ലിക്ക് ചെയ്യുക</span>
             </button>
 
@@ -95,7 +95,7 @@
         <div id="formScreen" class="screen-section">
             
             <div class="top-nav-bar">
-                <button type="button" class="back-btn" id="backToHomeBtn">⬅ ഹോം പേജ്</button>
+                <button type="button" class="back-btn" id="backToHomeBtn" onclick="showWelcomeScreen()">⬅ ഹോം പേജ്</button>
                 <div class="top-nav-title">ശബരിമല വെർച്വൽ ക്യൂ ബുക്കിംഗ്</div>
             </div>
 
@@ -103,11 +103,11 @@
 
             <form id="sabarimalaForm" class="form-body">
                 
-                <!-- STEP 1: DATE & SLOT -->
+                <!-- STEP 1: DATE, SLOT & OPTIONAL TEAM NAME -->
                 <div class="skeuo-card">
                     <div class="card-head">
                         <span class="step-num">01</span>
-                        <h3>ദർശന തീയതിയും സമയവും (Date & Time Slot)</h3>
+                        <h3>ദർശന തീയതിയും സമയവും (Date & Time)</h3>
                     </div>
 
                     <div class="reporting-alert" id="ui-reporting-note"></div>
@@ -122,43 +122,25 @@
                             <select id="visitSlot" required></select>
                         </div>
                     </div>
+
+                    <div class="field-group">
+                        <label>ടീം പേര് / നമ്പർ (Team Name or Number)</label>
+                        <input type="text" id="teamNumber" placeholder="ഒന്നിലധികം ടീമുകൾ ഉണ്ടെങ്കിൽ ആവശ്യമെങ്കിൽ പേരോ നമ്പറോ നൽകാം">
+                        <p class="sub-hint" style="margin-top:6px; margin-bottom:0;">ഒന്നിലധികം ടീമുകൾ ഉണ്ടെങ്കിൽ ആവശ്യമെങ്കിൽ ടീമുകൾക്ക് പേരോ നമ്പറോ നൽകാവുന്നതാണ്. നിർബന്ധമല്ല.</p>
+                    </div>
                 </div>
 
-                <!-- STEP 2: GROUP CONTACT & ADDRESS -->
+                <!-- STEP 2: PILGRIMS (MAX 5) -->
                 <div class="skeuo-card">
                     <div class="card-head">
                         <span class="step-num">02</span>
-                        <h3>ഗ്രൂപ്പ് ലീഡറുടെ ഫോൺ നമ്പറും വിലാസവും</h3>
-                    </div>
-
-                    <div class="grid-3">
-                        <div class="field-group">
-                            <label>വാട്സാപ്പ് / മൊബൈൽ നമ്പർ <span class="req">*</span></label>
-                            <input type="tel" id="groupMobile" pattern="[0-9]{10}" placeholder="10 അക്ക നമ്പർ" required>
-                        </div>
-                        <div class="field-group">
-                            <label>ജില്ല (District) <span class="req">*</span></label>
-                            <select id="groupDistrict" required></select>
-                        </div>
-                        <div class="field-group">
-                            <label>പിൻകോഡ് (Pincode) <span class="req">*</span></label>
-                            <input type="text" id="groupPincode" pattern="[0-9]{6}" placeholder="6 അക്ക നമ്പർ" required>
-                        </div>
-                    </div>
-
-                    <div class="field-group">
-                        <label>വീട്ടുപേര് / സ്ഥലം / പോസ്റ്റ് ഓഫീസ് <span class="req">*</span></label>
-                        <input type="text" id="groupAddress" placeholder="House Name, Locality, Post Office" required>
-                    </div>
-                </div>
-
-                <!-- STEP 3: PILGRIMS (MAX 5) -->
-                <div class="skeuo-card">
-                    <div class="card-head">
-                        <span class="step-num">03</span>
                         <h3>തീർത്ഥാടകരുടെ വിവരങ്ങൾ (പരമാവധി 5 പേർ)</h3>
                     </div>
-                    <p class="sub-hint">ഒരു ഗ്രൂപ്പിൽ പരമാവധി 5 പേരെയാണ് ബുക്ക് ചെയ്യാൻ സാധിക്കുക. പേരിന് മുൻപിൽ 'സ്വാമി' എന്ന് തനിയെ ചേർക്കപ്പെടും.</p>
+                    <div class="team-limit-banner">
+                        ഒരു ടീമിൽ പരമാവധി 5 പേര് മാത്രം !<br>
+                        കൂടുതൽ ആൾ ഉണ്ടെങ്കില് പുതിയ ടീം ആയി രെജിസ്റ്റർ ചെയ്യുക
+                    </div>
+                    <p class="sub-hint">ഒരു ടീമിൽ പരമാവധി 5 പേരെയാണ് ബുക്ക് ചെയ്യാൻ സാധിക്കുക.</p>
 
                     <div id="pilgrimsList">
                         <!-- Pilgrim cards rendered by app.js -->
@@ -202,8 +184,19 @@
 
     </div>
 
-    <!-- Scripts -->
-    <script src="/Premium/content.js"></script>
-    <script src="/Premium/app.js"></script>
+    <script>
+        function showFormScreen() {
+            document.getElementById("welcomeScreen").classList.remove("active-screen");
+            document.getElementById("formScreen").classList.add("active-screen");
+            window.scrollTo(0, 0);
+        }
+        function showWelcomeScreen() {
+            document.getElementById("formScreen").classList.remove("active-screen");
+            document.getElementById("welcomeScreen").classList.add("active-screen");
+            window.scrollTo(0, 0);
+        }
+    </script>
+    <script src="content.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

@@ -35,11 +35,32 @@ const NEXIA_CONTENT = {
         "ലഭ്യമായ ഏത് സമയവും (Any Available Slot)"
     ],
 
-    districts: [
-        "Thrissur", "Thiruvananthapuram", "Kollam", "Pathanamthitta",
-        "Alappuzha", "Kottayam", "Idukki", "Ernakulam", "Palakkad",
-        "Malappuram", "Kozhikode", "Wayanad", "Kannur", "Kasaragod", "Other State"
+    languages: [
+        "Malayalam", "English", "Hindi", "Tamil", "Kannada", "Telugu"
     ],
+    defaultLanguage: "Malayalam",
+
+    photoIdTypes: [
+        "Aadhaar Card", "Voter ID", "Driving Licence", "Passport", "PAN Card"
+    ],
+
+    countries: [
+        "INDIA"
+    ],
+    defaultCountry: "INDIA",
+
+    states: [
+        "KERALA", "Tamil Nadu", "Karnataka", "Andhra Pradesh", "Telangana",
+        "Maharashtra", "Goa", "Puducherry", "Other"
+    ],
+    defaultState: "KERALA",
+
+    districts: [
+        "THRISSUR", "Thiruvananthapuram", "Kollam", "Pathanamthitta",
+        "Alappuzha", "Kottayam", "Idukki", "Ernakulam", "Palakkad",
+        "Malappuram", "Kozhikode", "Wayanad", "Kannur", "Kasaragod", "Other"
+    ],
+    defaultDistrict: "THRISSUR",
 
     stars: [
         "അശ്വതി (Aswathi)", "ഭരണി (Bharani)", "കാർത്തിക (Kaarthika)", "രോഹിണി (Rohini)",

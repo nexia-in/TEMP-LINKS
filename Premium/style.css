@@ -65,7 +65,7 @@ body {
 }
 
 .screen-section { display: none; }
-.screen-section.active-screen { display: block; animation: fadeIn 0.4s ease; }
+.screen-section.active-screen { display: block !important; animation: fadeIn 0.4s ease; }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
@@ -209,6 +209,8 @@ body {
 
 /* 3D Tactile Start Button */
 .tactile-start-btn {
+    position: relative;
+    z-index: 30;
     padding: 16px 34px;
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.35);
@@ -379,6 +381,19 @@ body {
     margin-bottom: 12px;
 }
 
+.team-limit-banner {
+    background: rgba(251, 113, 133, 0.12);
+    border: 1px solid rgba(251, 113, 133, 0.4);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #fecdd3;
+    text-align: center;
+    line-height: 1.55;
+}
+
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
 
@@ -437,17 +452,27 @@ input:focus, select:focus {
     cursor: pointer;
 }
 
-/* Compact 2-Line Grid for Each Pilgrim */
-.pilgrim-compact-row-1 {
+.pilgrim-section-label {
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--neon-gold);
+    letter-spacing: 0.3px;
+    margin: 12px 0 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed rgba(255, 183, 3, 0.25);
+}
+
+.pilgrim-row-2 {
     display: grid;
-    grid-template-columns: 2fr 1fr 0.9fr 1.3fr;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-bottom: 8px;
 }
-.pilgrim-compact-row-2 {
+.pilgrim-row-3 {
     display: grid;
-    grid-template-columns: 1.5fr 1.5fr 0.8fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
+    margin-bottom: 8px;
 }
 
 .swami-input-wrap {
@@ -542,7 +567,84 @@ input:focus, select:focus {
 .footer-disc { font-size: 11px; color: #64748b; margin-top: 4px; }
 
 @media (max-width: 680px) {
-    .grid-2, .grid-3, .pilgrim-compact-row-1, .pilgrim-compact-row-2 {
+    .grid-2, .grid-3, .pilgrim-row-2, .pilgrim-row-3 {
         grid-template-columns: 1fr;
+    }
+}
+/* added*/
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* കറങ്ങുന്ന അഗ്നിവലയത്തിനുള്ള സ്റ്റൈൽ */
+.fire-container {
+    position: relative;
+    width: 200px; /* ചിത്രത്തിന്റെ അതേ വലിപ്പം */
+    height: 200px;
+    margin: 0 auto;
+}
+
+.fire-glow-ring {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 50%, rgba(255, 68, 0, 0.4) 70%, rgba(255, 170, 0, 0.8) 100%);
+    box-shadow: 0 0 20px rgba(255, 68, 0, 0.8), 
+                0 0 40px rgba(255, 170, 0, 0.6), 
+                inset 0 0 20px rgba(255, 68, 0, 0.5);
+    animation: fire-spin 4s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* കനൽ ചിതറുന്ന ആനിമേഷൻ */
+@keyframes fire-spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+        filter: blur(1px) brightness(1.2);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.02);
+        filter: blur(1.5px) brightness(1.5);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        filter: blur(1px) brightness(1.2);
+    }
+}
+
+/*അഗ്നിവലയ കോഡ്*/
+/* കറങ്ങുന്ന അഗ്നിവലയത്തിനുള്ള സ്റ്റൈൽ */
+.fire-glow-ring {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 55%, rgba(255, 68, 0, 0.4) 75%, rgba(255, 170, 0, 0.8) 100%);
+    box-shadow: 0 0 20px rgba(255, 68, 0, 0.8), 
+                inset 0 0 20px rgba(255, 68, 0, 0.5);
+    animation: fire-spin 4s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* കനൽ ചിതറുന്ന ആനിമേഷൻ */
+@keyframes fire-spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+        filter: blur(1px) brightness(1.2);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.03);
+        filter: blur(2px) brightness(1.5);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        filter: blur(1px) brightness(1.2);
     }
 }

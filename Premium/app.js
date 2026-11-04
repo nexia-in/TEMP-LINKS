@@ -1,6 +1,25 @@
-document.addEventListener("DOMContentLoaded", () => {
+function showFormScreen() {
+    const welcomeScreen = document.getElementById("welcomeScreen");
+    const formScreen = document.getElementById("formScreen");
+    if (welcomeScreen) welcomeScreen.classList.remove("active-screen");
+    if (formScreen) formScreen.classList.add("active-screen");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function showWelcomeScreen() {
+    const welcomeScreen = document.getElementById("welcomeScreen");
+    const formScreen = document.getElementById("formScreen");
+    if (formScreen) formScreen.classList.remove("active-screen");
+    if (welcomeScreen) welcomeScreen.classList.add("active-screen");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function initApp() {
     const maxPilgrims = 5;
     let pilgrimCount = 0;
+
+    document.getElementById("startBtn").addEventListener("click", showFormScreen);
+    document.getElementById("backToHomeBtn").addEventListener("click", showWelcomeScreen);
 
     // 1. Load Texts from content.js
     document.getElementById("ui-chant").textContent = NEXIA_CONTENT.chant;
@@ -25,38 +44,17 @@ document.addEventListener("DOMContentLoaded", () => {
         srvContainer.appendChild(span);
     });
 
-    // Populate Slots & Districts
-    const slotSelect = document.getElementById("visitSlot");
-    NEXIA_CONTENT.timeSlots.forEach(slot => {
-        const opt = document.createElement("option");
-        opt.value = slot;
-        opt.textContent = slot;
-        slotSelect.appendChild(opt);
-    });
+    function fillSelect(selectEl, items, defaultValue) {
+        items.forEach(item => {
+            const opt = document.createElement("option");
+            opt.value = item;
+            opt.textContent = item;
+            if (defaultValue && item === defaultValue) opt.selected = true;
+            selectEl.appendChild(opt);
+        });
+    }
 
-    const distSelect = document.getElementById("groupDistrict");
-    NEXIA_CONTENT.districts.forEach(dist => {
-        const opt = document.createElement("option");
-        opt.value = dist;
-        opt.textContent = dist;
-        distSelect.appendChild(opt);
-    });
-
-    // 2. Navigation Between Welcome Screen & Form Screen
-    const welcomeScreen = document.getElementById("welcomeScreen");
-    const formScreen = document.getElementById("formScreen");
-
-    document.getElementById("startBtn").addEventListener("click", () => {
-        welcomeScreen.classList.remove("active-screen");
-        formScreen.classList.add("active-screen");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    document.getElementById("backToHomeBtn").addEventListener("click", () => {
-        formScreen.classList.remove("active-screen");
-        welcomeScreen.classList.add("active-screen");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+    fillSelect(document.getElementById("visitSlot"), NEXIA_CONTENT.timeSlots);
 
     // 3. Pilgrim Row Builder (Up to 5 Pilgrims)
     const pilgrimsList = document.getElementById("pilgrimsList");
@@ -66,12 +64,44 @@ document.addEventListener("DOMContentLoaded", () => {
         return NEXIA_CONTENT.stars.map(s => `<option value="${s}">${s}</option>`).join("");
     }
 
+    function getLanguageOptionsHtml() {
+        return NEXIA_CONTENT.languages.map(lang => {
+            const selected = lang === NEXIA_CONTENT.defaultLanguage ? " selected" : "";
+            return `<option value="${lang}"${selected}>${lang}</option>`;
+        }).join("");
+    }
+
+    function getPhotoIdOptionsHtml() {
+        return NEXIA_CONTENT.photoIdTypes.map(t => `<option value="${t}">${t}</option>`).join("");
+    }
+
+    function getCountryOptionsHtml() {
+        return NEXIA_CONTENT.countries.map(c => {
+            const selected = c === NEXIA_CONTENT.defaultCountry ? " selected" : "";
+            return `<option value="${c}"${selected}>${c}</option>`;
+        }).join("");
+    }
+
+    function getStateOptionsHtml() {
+        return NEXIA_CONTENT.states.map(s => {
+            const selected = s === NEXIA_CONTENT.defaultState ? " selected" : "";
+            return `<option value="${s}"${selected}>${s}</option>`;
+        }).join("");
+    }
+
+    function getDistrictOptionsHtml() {
+        return NEXIA_CONTENT.districts.map(d => {
+            const selected = d === NEXIA_CONTENT.defaultDistrict ? " selected" : "";
+            return `<option value="${d}"${selected}>${d}</option>`;
+        }).join("");
+    }
+
     function addPilgrimCard() {
         if (pilgrimCount >= maxPilgrims) return;
         pilgrimCount++;
 
         const isLeader = pilgrimCount === 1;
-        const roleTitle = isLeader ? "ഗ്രൂപ്പ് ലീഡർ (Main Swami - 1)" : `തീർത്ഥാടകൻ (Pilgrim - ${pilgrimCount})`;
+        const roleTitle = isLeader ? "ടീം ലീഡർ (Main Swami - 1)" : `തീർത്ഥാടകൻ (Pilgrim - ${pilgrimCount})`;
 
         const card = document.createElement("div");
         card.className = "pilgrim-box";
@@ -83,51 +113,136 @@ document.addEventListener("DOMContentLoaded", () => {
                 ${!isLeader ? `<button type="button" class="remove-p-btn" onclick="removePilgrim(this)">✕ ഒഴിവാക്കുക</button>` : ""}
             </div>
 
-            <!-- Line 1: Swami Name, Gender, Age/DOB, Star -->
-            <div class="pilgrim-compact-row-1">
+            <div class="pilgrim-row-2">
                 <div>
-                    <label>പേര് (ID പ്രകാരം) <span class="req">*</span></label>
-                    <div class="swami-input-wrap">
-                        <span class="swami-prefix">സ്വാമി:</span>
-                        <input type="text" class="p-name" placeholder="മുഴുവൻ പേര്" required>
-                    </div>
+                    <label>First Name <span class="req">*</span></label>
+                    <input type="text" class="p-first-name" placeholder="First Name" required>
                 </div>
                 <div>
-                    <label>ലിംഗം <span class="req">*</span></label>
+                    <label>Last Name <span class="req">*</span></label>
+                    <input type="text" class="p-last-name" placeholder="Last Name" required>
+                </div>
+            </div>
+
+            <div class="pilgrim-row-3">
+                <div>
+                    <label>Mobile Number <span class="req">*</span></label>
+                    <input type="tel" class="p-mobile" pattern="[0-9]{10}" placeholder="10 അക്ക നമ്പർ" required>
+                </div>
+                <div>
+                    <label>Gender <span class="req">*</span></label>
                     <select class="p-gender" required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
                 </div>
                 <div>
-                    <label>വയസ്സ് / DOB <span class="req">*</span></label>
-                    <input type="text" class="p-age" placeholder="വയസ്സ് അല്ലെങ്കിൽ DOB" required>
+                    <label>Date of Birth <span class="req">*</span></label>
+                    <input type="date" class="p-dob" required>
+                </div>
+            </div>
+
+            <div class="pilgrim-row-3">
+                <div>
+                    <label>Photo ID Type <span class="req">*</span></label>
+                    <select class="p-idtype" required>
+                        ${getPhotoIdOptionsHtml()}
+                    </select>
                 </div>
                 <div>
-                    <label>നക്ഷത്രം <span class="req">*</span></label>
-                    <select class="p-star" required>
-                        <option value="">തിരഞ്ഞെടുക്കുക</option>
-                        ${getStarsOptionsHtml()}
+                    <label>ID Number <span class="req">*</span></label>
+                    <input type="text" class="p-idnum" placeholder="ID Number" required>
+                </div>
+                <div>
+                    <label>Language <span class="req">*</span></label>
+                    <select class="p-language" required>
+                        ${getLanguageOptionsHtml()}
                     </select>
                 </div>
             </div>
 
-            <!-- Line 2: ID Number, Parent/Nominee Name, Parent Age -->
-            <div class="pilgrim-compact-row-2">
+            <div class="field-group">
+                <label>Star (നക്ഷത്രം) <span class="req">*</span></label>
+                <select class="p-star" required>
+                    <option value="">തിരഞ്ഞെടുക്കുക</option>
+                    ${getStarsOptionsHtml()}
+                </select>
+            </div>
+
+            <div class="pilgrim-section-label">വിലാസം (Address)</div>
+            <div class="field-group">
+                <label>Address <span class="req">*</span></label>
+                <input type="text" class="p-address" placeholder="House Name, Street, Locality" required>
+            </div>
+            <div class="pilgrim-row-2">
                 <div>
-                    <label>ആധാർ / ID നമ്പർ <span class="req">*</span></label>
-                    <input type="text" class="p-idnum" placeholder="ID കാർഡ് നമ്പർ" required>
+                    <label>Post Office <span class="req">*</span></label>
+                    <input type="text" class="p-post-office" placeholder="Post Office" required>
                 </div>
                 <div>
-                    <label>അച്ഛന്റെ / നോമിനിയുടെ പേര് <span class="req">*</span></label>
-                    <input type="text" class="p-parent-name" placeholder="രക്ഷിതാവിന്റെ പേര്" required>
+                    <label>Postal Code <span class="req">*</span></label>
+                    <input type="text" class="p-postal-code" pattern="[0-9]{6}" placeholder="6 അക്ക നമ്പർ" required>
+                </div>
+            </div>
+            <div class="pilgrim-row-3">
+                <div>
+                    <label>Country <span class="req">*</span></label>
+                    <select class="p-country" required>
+                        ${getCountryOptionsHtml()}
+                    </select>
                 </div>
                 <div>
-                    <label>രക്ഷിതാവിന്റെ വയസ്സ് <span class="req">*</span></label>
-                    <input type="number" class="p-parent-age" min="1" max="115" placeholder="വയസ്സ്" required>
+                    <label>State / Province <span class="req">*</span></label>
+                    <select class="p-state" required>
+                        ${getStateOptionsHtml()}
+                    </select>
+                </div>
+                <div>
+                    <label>District / City <span class="req">*</span></label>
+                    <select class="p-district" required>
+                        ${getDistrictOptionsHtml()}
+                    </select>
+                </div>
+            </div>
+            <div class="field-group">
+                <label>Zip / Pincode <span class="req">*</span></label>
+                <input type="text" class="p-pincode" pattern="[0-9]{6}" placeholder="6 അക്ക നമ്പർ" required>
+            </div>
+
+            <div class="pilgrim-section-label">രക്ഷകർത്താവ് (Guardian)</div>
+            <div class="pilgrim-row-3">
+                <div>
+                    <label>രക്ഷകർത്താവിന്റെ പേര് (Guardian Name) <span class="req">*</span></label>
+                    <input type="text" class="p-parent-name" placeholder="Guardian Name" required>
+                </div>
+                <div>
+                    <label>രക്ഷകർത്താവിന്റെ പ്രായം (Guardian Age) <span class="req">*</span></label>
+                    <input type="number" class="p-parent-age" min="1" max="120" placeholder="Age" required>
+                </div>
+                <div>
+                    <label>രക്ഷകർത്താവുമായുള്ള ബന്ധം (Relation) <span class="req">*</span></label>
+                    <select class="p-parent-relation" required>
+                        <option value="Father">Father</option>
+                        <option value="Mother">Mother</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="text" class="p-parent-relation-other" placeholder="Specify relation" style="display:none; margin-top:8px;">
                 </div>
             </div>
         `;
+
+        const relationSelect = card.querySelector(".p-parent-relation");
+        const relationOther = card.querySelector(".p-parent-relation-other");
+        relationSelect.addEventListener("change", () => {
+            if (relationSelect.value === "Other") {
+                relationOther.style.display = "block";
+                relationOther.required = true;
+            } else {
+                relationOther.style.display = "none";
+                relationOther.required = false;
+                relationOther.value = "";
+            }
+        });
 
         pilgrimsList.appendChild(card);
         updateAddButtonState();
@@ -146,7 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
         boxes.forEach((box, idx) => {
             const num = idx + 1;
             const tag = box.querySelector(".p-role-tag");
-            tag.textContent = num === 1 ? "ഗ്രൂപ്പ് ലീഡർ (Main Swami - 1)" : `തീർത്ഥാടകൻ (Pilgrim - ${num})`;
+            tag.textContent = num === 1 ? "ടീം ലീഡർ (Main Swami - 1)" : `തീർത്ഥാടകൻ (Pilgrim - ${num})`;
         });
     }
 
@@ -170,51 +285,65 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("sabarimalaForm").addEventListener("submit", (e) => {
         e.preventDefault();
 
+        const teamNumber = document.getElementById("teamNumber").value.trim();
         const visitDate = document.getElementById("visitDate").value;
         const visitSlot = document.getElementById("visitSlot").value;
-        const mobile = document.getElementById("groupMobile").value.trim();
-        const district = document.getElementById("groupDistrict").value;
-        const pincode = document.getElementById("groupPincode").value.trim();
-        const address = document.getElementById("groupAddress").value.trim();
 
         const boxes = pilgrimsList.querySelectorAll(".pilgrim-box");
         let singleLinesText = "";
         latestPilgrimHtmlRows = "";
 
         boxes.forEach((box, idx) => {
-            const role = idx === 0 ? "GROUP LEADER" : `PILGRIM ${idx + 1}`;
-            const name = box.querySelector(".p-name").value.trim();
+            const role = idx === 0 ? "TEAM LEADER" : `PILGRIM ${idx + 1}`;
+            const firstName = box.querySelector(".p-first-name").value.trim();
+            const lastName = box.querySelector(".p-last-name").value.trim();
+            const mobile = box.querySelector(".p-mobile").value.trim();
             const gender = box.querySelector(".p-gender").value;
-            const age = box.querySelector(".p-age").value.trim();
-            const star = box.querySelector(".p-star").value;
+            const dob = box.querySelector(".p-dob").value;
+            const idtype = box.querySelector(".p-idtype").value;
             const idnum = box.querySelector(".p-idnum").value.trim();
+            const language = box.querySelector(".p-language").value;
+            const star = box.querySelector(".p-star").value;
+            const address = box.querySelector(".p-address").value.trim();
+            const postOffice = box.querySelector(".p-post-office").value.trim();
+            const postalCode = box.querySelector(".p-postal-code").value.trim();
+            const country = box.querySelector(".p-country").value;
+            const state = box.querySelector(".p-state").value;
+            const district = box.querySelector(".p-district").value;
+            const pincode = box.querySelector(".p-pincode").value.trim();
             const parentName = box.querySelector(".p-parent-name").value.trim();
             const parentAge = box.querySelector(".p-parent-age").value.trim();
+            const relationSelect = box.querySelector(".p-parent-relation").value;
+            const relationOther = box.querySelector(".p-parent-relation-other").value.trim();
+            const relation = relationSelect === "Other" ? (relationOther || "Other") : relationSelect;
 
-            // Single-line compact format for easy copy-paste
-            singleLinesText += `${idx + 1}. [${role}] സ്വാമി: ${name} | ${gender} | Age/DOB: ${age} | Star: ${star} | ID: ${idnum} | Parent: ${parentName} (${parentAge} Yrs)\n`;
+            singleLinesText += `${idx + 1}. [${role}] ${firstName} ${lastName} | Mobile: ${mobile} | ${gender} | DOB: ${dob} | ${idtype}: ${idnum} | Lang: ${language} | Star: ${star} | Address: ${address}, ${postOffice}, ${district}, ${state}, ${country} - ${postalCode}/${pincode} | Guardian: ${parentName} (${relation}, ${parentAge} Yrs)\n`;
 
             latestPilgrimHtmlRows += `
                 <tr>
                     <td>${idx + 1} (${role})</td>
-                    <td><strong>സ്വാമി: ${name}</strong></td>
+                    <td><strong>${firstName} ${lastName}</strong></td>
+                    <td>${mobile}</td>
                     <td>${gender}</td>
-                    <td>${age}</td>
-                    <td>${star}</td>
+                    <td>${dob}</td>
+                    <td>${idtype}</td>
                     <td>${idnum}</td>
-                    <td>${parentName} (${parentAge})</td>
+                    <td>${language}</td>
+                    <td>${star}</td>
+                    <td>${address}, ${postOffice}, ${district}, ${state}, ${country} - ${postalCode}/${pincode}</td>
+                    <td>${parentName} (${relation}, ${parentAge} Yrs)</td>
                 </tr>`;
         });
+
+        const teamLine = teamNumber ? `*Team Name/Number:* ${teamNumber}\n` : "";
 
         const fullMessage = 
 `*SABARIMALA VIRTUAL-Q BOOKING*
 *Nexia Virtual Desk*
 ----------------------------------
-*Date:* ${visitDate} | *Slot:* ${visitSlot}
-*Leader Mobile:* ${mobile}
-*Address:* ${address}, ${district} - ${pincode}
+${teamLine}*Date:* ${visitDate} | *Slot:* ${visitSlot}
 ----------------------------------
-*PILGRIMS LIST (${boxes.length}):*
+*PILGRIMS LIST (${boxes.length} / 5):*
 ${singleLinesText}----------------------------------
 *(ഫോട്ടോയും ഐഡി കാർഡ് കോപ്പിയും ഇതോടൊപ്പം വാട്സാപ്പിൽ അയക്കുന്നു)*`;
 
@@ -239,30 +368,30 @@ ${singleLinesText}----------------------------------
 
     // Download Interactive HTML Slip Button
     document.getElementById("downloadHtmlBtn").addEventListener("click", () => {
+        const teamNumber = document.getElementById("teamNumber").value.trim();
         const visitDate = document.getElementById("visitDate").value;
         const visitSlot = document.getElementById("visitSlot").value;
-        const mobile = document.getElementById("groupMobile").value.trim();
-        const district = document.getElementById("groupDistrict").value;
-        const pincode = document.getElementById("groupPincode").value.trim();
-        const address = document.getElementById("groupAddress").value.trim();
+        const firstBox = pilgrimsList.querySelector(".pilgrim-box");
+        const leaderMobile = firstBox ? firstBox.querySelector(".p-mobile").value.trim() : "booking";
+        const teamLabel = teamNumber || leaderMobile;
 
         const downloadableHtml = `<!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>Nexia Sabarimala Booking Data - ${mobile}</title>
+<head><meta charset="UTF-8"><title>Nexia Sabarimala Booking Data - ${teamLabel}</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 20px; background: #f8fafc; color: #1e293b; }
 h2 { color: #0f172a; }
 table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff; }
-th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: left; font-size: 14px; }
+th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: left; font-size: 13px; }
 th { background: #1e293b; color: #fff; }
 </style></head>
 <body>
 <h2>SABARIMALA VIRTUAL-Q DATA | NEXIA VIRTUAL DESK</h2>
+${teamNumber ? `<p><strong>Team Name/Number:</strong> ${teamNumber}</p>` : ""}
 <p><strong>Preferred Date:</strong> ${visitDate} | <strong>Slot:</strong> ${visitSlot}</p>
-<p><strong>Mobile:</strong> ${mobile} | <strong>Address:</strong> ${address}, ${district} - ${pincode}</p>
 <table>
     <thead>
-        <tr><th>#</th><th>Swami Name</th><th>Gender</th><th>Age/DOB</th><th>Star</th><th>ID Number</th><th>Parent/Nominee (Age)</th></tr>
+        <tr><th>#</th><th>Name</th><th>Mobile</th><th>Gender</th><th>DOB</th><th>Photo ID Type</th><th>ID Number</th><th>Language</th><th>Star</th><th>Address</th><th>Guardian (Relation, Age)</th></tr>
     </thead>
     <tbody>${latestPilgrimHtmlRows}</tbody>
 </table>
@@ -271,7 +400,13 @@ th { background: #1e293b; color: #fff; }
         const blob = new Blob([downloadableHtml], { type: "text/html" });
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-        link.download = `Sabarimala_Group_${mobile}.html`;
+        link.download = `Sabarimala_Team_${teamLabel}.html`;
         link.click();
     });
-});
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initApp);
+} else {
+    initApp();
+}
